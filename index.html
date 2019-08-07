@@ -1,14 +1,14 @@
-
 <html>
-    <body>
-      <p id='server-time'></p>
-      <script>
-        var HOST = location.origin.replace(/^http/, 'ws')
-        var ws = new WebSocket(HOST);
-        var el = document.getElementById('server-time');
-        ws.onmessage = function (event) {
-          el.innerHTML = 'Server time: ' + event.data;
-        };
-      </script>
-    </body>
-  </html>
+  <body>
+    <p id='server-time'></p>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      var el = document.getElementById('server-time');
+      
+      socket.on('time', function(timeString) {
+        el.innerHTML = 'Server time: ' + timeString;
+      });
+    </script>
+  </body>
+</html>
